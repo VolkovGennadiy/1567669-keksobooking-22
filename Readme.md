@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг»
 
 * Студент: [Геннадий Волков](https://up.htmlacademy.ru/javascript/22/user/1567669).
-* Наставник: `Неизвестно`.
+* Наставник: [Антон Попов](https://htmlacademy.ru/profile/joker).
 
 ---
 
