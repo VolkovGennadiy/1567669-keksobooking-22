@@ -1,3 +1,10 @@
+/**
+ * Получение случайного числа из диапазона
+ * @param {number} min — минимальное значение
+ * @param {number} max — максимальное значение
+ * @return {number} — случайное число
+ */
+
 const getRandomIntegerRange = function (min, max) {
   if (min < 0) {
     min = 0;
@@ -14,6 +21,14 @@ const getRandomIntegerRange = function (min, max) {
   let rand = min + Math.random() * (max + 1 - min);
   return Math.floor(rand);
 };
+
+/**
+ * Получение случайного числа из диапазона
+ * @param {number} min — минимальное значение
+ * @param {number} max — максимальное значение
+ * @param {number} n — количество знаков после запятой
+ * @return {number} — случайное число
+ */
 
 const getRandomFloatRange = function (min, max, n) {
   if (min < 0) {
@@ -35,10 +50,10 @@ const getRandomFloatRange = function (min, max, n) {
 getRandomIntegerRange(3, 9);
 getRandomFloatRange(6, 8, 5);
 
-const avatarQuantity = 8;
-const cardsQuantity = 10;
+const AVATAR_QUANTITY = 8;
+const CARDS_QUANTITY = 10;
 
-const titles = [
+const TITLES = [
   'Уютная квартира в центре Токио',
   'Бунгало для вечеринок',
   'Уголок рая только для двоих',
@@ -46,7 +61,7 @@ const titles = [
   'Отличный выбор для путешественников',
 ];
 
-const coordinates = {
+const COORDINATES = {
   minX: 35.65000,
   maxX: 35.70000,
   minY: 139.70000,
@@ -54,41 +69,35 @@ const coordinates = {
   figures: 5,
 };
 
-const price = {
+const PRICE = {
   min: 0,
   max: 100000,
 }
 
-const typeHousings = [
+const TYPE_HOUSINGS = [
   'palace',
   'flat',
   'house',
   'bungalow',
 ];
 
-const roomsQuantity = {
+const ROOMS_QUANTITY = {
   min: 1,
   max: 5,
 };
 
-const guestsQuantity = {
+const QUESTS_QUANTITY = {
   min: 1,
   max: 5,
 }
 
-const checkinTimes = [
+const CHECKIN_CHECKOUT_TIMES = [
   '12:00',
   '13:00',
   '14:00',
 ];
 
-const checkoutTimes = [
-  '12:00',
-  '13:00',
-  '14:00',
-];
-
-const features = [
+const FEATURES = [
   'wifi',
   'dishwasher',
   'parking',
@@ -97,7 +106,7 @@ const features = [
   'conditioner',
 ];
 
-const description = [
+const DESCRIPTION = [
   'Уютная квартира, со всем необходимом для проживания',
   'Рай в шалаше для двоих',
   'Берлога для холостяков на пару вечеров',
@@ -106,14 +115,11 @@ const description = [
   'Вся для проживания в центре города',
 ];
 
-const photos = [
+const PHOTOS = [
   'http://o0.github.io/assets/images/tokyo/hotel1.jpg',
   'http://o0.github.io/assets/images/tokyo/hotel2.jpg',
   'http://o0.github.io/assets/images/tokyo/hotel3.jpg',
 ];
-
-const coordinatesX = getRandomFloatRange(coordinates.minX, coordinates.maxY, coordinates.figures);
-const coordinatesY = getRandomFloatRange(coordinates.minY, coordinates.maxY, coordinates.figures);
 
 const getAheadZeroRandomNumber = (quantity) => {
   const number = getRandomIntegerRange(1, quantity);
@@ -121,9 +127,21 @@ const getAheadZeroRandomNumber = (quantity) => {
   return aheadZero + number
 };
 
+/**
+ * Выбирает случайный элемент из массива, возможно повторение
+ * @param {Array} array - входной массив
+ * @return {*} случайный элемент массива
+ */
+
 const getArrayRandomElements = (array) => {
   return array[Math.floor(Math.random() * array.length)];
 };
+
+/**
+ * Перемешивает элементы массива в случайном порядке
+ * @param {array} array — исходный массив
+ * @return {array} — итоговый массив
+ */
 
 const shufleArray = (array) => {
   for (let i = array.length - 1; i > 0; i--) {
@@ -135,27 +153,41 @@ const shufleArray = (array) => {
   return array;
 }
 
+/**
+ * Выбирает случает элемент из массива.
+ * @param {Array} array - входной массив
+ * @return {*} случайный элемент массива
+ */
+
 const getArrayQuantityRandomElements = (array) => {
   return shufleArray(array).slice(0, getRandomIntegerRange(1, array.length));
 }
 
-const creatureCard = () => {
+/**
+ * Генерирует объект объявления из заданных набора данных
+ * @return {object} — итоговый объект объявления
+ */
+
+const createCard = () => {
+  const coordinatesX = getRandomFloatRange(COORDINATES.minX, COORDINATES.maxY, COORDINATES.figures);
+  const coordinatesY = getRandomFloatRange(COORDINATES.minY, COORDINATES.maxY, COORDINATES.figures);
+
   const card = {
     author: {
-      avatar: 'img/avatars/user' + getAheadZeroRandomNumber(avatarQuantity) + '.png',
+      avatar: 'img/avatars/user' + getAheadZeroRandomNumber(AVATAR_QUANTITY) + '.png',
     },
     offer: {
-      title: getArrayRandomElements(titles),
+      title: getArrayRandomElements(TITLES),
       adress: coordinatesX + ', ' + coordinatesY,
-      price: getRandomIntegerRange(price.min, price.max),
-      type: getArrayRandomElements(typeHousings),
-      rooms: getRandomIntegerRange(roomsQuantity.min, roomsQuantity.max),
-      guests: getRandomIntegerRange(guestsQuantity.min, guestsQuantity.max),
-      checkin: getArrayRandomElements(checkinTimes),
-      checkout: getArrayRandomElements(checkoutTimes),
-      features: getArrayQuantityRandomElements(features),
-      description: getArrayRandomElements(description),
-      photos: getArrayQuantityRandomElements(photos),
+      price: getRandomIntegerRange(PRICE.min, PRICE.max),
+      type: getArrayRandomElements(TYPE_HOUSINGS),
+      rooms: getRandomIntegerRange(ROOMS_QUANTITY.min, ROOMS_QUANTITY.max),
+      guests: getRandomIntegerRange(QUESTS_QUANTITY.min, QUESTS_QUANTITY.max),
+      checkin: getArrayRandomElements(CHECKIN_CHECKOUT_TIMES),
+      checkout: getArrayRandomElements(CHECKIN_CHECKOUT_TIMES),
+      features: getArrayQuantityRandomElements(FEATURES),
+      description: getArrayRandomElements(DESCRIPTION),
+      photos: getArrayQuantityRandomElements(PHOTOS),
     },
     location: {
       x: coordinatesX,
@@ -168,10 +200,9 @@ const creatureCard = () => {
 const creatureCardList = (quantity) => {
   let cardList = [];
   for (let i = 0; i < quantity; i++) {
-    cardList.push(creatureCard(quantity));
+    cardList.push(createCard());
   }
   return cardList;
 }
 
-creatureCardList(cardsQuantity);
-
+creatureCardList(CARDS_QUANTITY);
