@@ -1,4 +1,10 @@
-import {getRandomIntegerRange, getRandomFloatRange} from './util.js';
+import {
+  getRandomIntegerRange,
+  getRandomFloatRange,
+  getRandomObjectValue,
+  getArrayRandomElements,
+  getArrayQuantityRandomElements
+} from './util.js';
 
 const AVATAR_QUANTITY = 8;
 const CARDS_QUANTITY = 10;
@@ -24,12 +30,12 @@ const Price = {
   max: 100000,
 }
 
-const TYPE_HOUSINGS = [
-  'palace',
-  'flat',
-  'house',
-  'bungalow',
-];
+const TYPE_HOUSINGS = {
+  bungalo: 'Бунгало',
+  flat: 'Квартира',
+  house: 'Дом',
+  palace: 'Дворец',
+};
 
 const RoomsQuantity = {
   min: 1,
@@ -78,39 +84,6 @@ const getAheadZeroRandomNumber = (quantity) => {
 };
 
 /**
- * Выбирает случайный элемент из массива, возможно повторение
- * @param {Array} array - входной массив
- * @return {*} случайный элемент массива
- */
-const getArrayRandomElements = (array) => {
-  return array[Math.floor(Math.random() * array.length)];
-};
-
-/**
- * Перемешивает элементы массива в случайном порядке
- * @param {array} array — исходный массив
- * @return {array} — итоговый массив
- */
-const shufleArray = (array) => {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random()*(i + 1));
-    const temp = array[j];
-    array[j] = array[i];
-    array[i] = temp;
-  }
-  return array;
-}
-
-/**
- * Выбирает случает элемент из массива.
- * @param {Array} array - входной массив
- * @return {*} случайный элемент массива
- */
-const getArrayQuantityRandomElements = (array) => {
-  return shufleArray(array).slice(0, getRandomIntegerRange(1, array.length));
-}
-
-/**
  * Генерирует объект объявления из заданных набора данных
  * @return {object} — итоговый объект объявления
  */
@@ -126,7 +99,7 @@ const createCard = () => {
       title: getArrayRandomElements(TITLES),
       adress: coordinatesX + ', ' + coordinatesY,
       price: getRandomIntegerRange(Price.min, Price.max),
-      type: getArrayRandomElements(TYPE_HOUSINGS),
+      type: getRandomObjectValue(TYPE_HOUSINGS),
       rooms: getRandomIntegerRange(RoomsQuantity.min, RoomsQuantity.max),
       guests: getRandomIntegerRange(QuestsQuantity.min, QuestsQuantity.max),
       checkin: getArrayRandomElements(CHECKIN_CHECKOUT_TIMES),

@@ -45,4 +45,52 @@ const getRandomFloatRange = function (min, max, n) {
   return rand.toFixed(n);
 };
 
-export {getRandomIntegerRange, getRandomFloatRange};
+/**
+ * Получение случайного элемента объекта
+ * @param {object} object — исходный объект
+ * @return {string|number|object} — значение объекта со случайным ключом
+ */
+const getRandomObjectValue = (object) => {
+  return object[Object.keys(object)[Math.floor(Math.random() * Object.keys(object).length)]];
+};
+
+/**
+ * Выбирает случайный элемент из массива, возможно повторение
+ * @param {Array} array - входной массив
+ * @return {*} случайный элемент массива
+ */
+const getArrayRandomElements = (array) => {
+  return array[Math.floor(Math.random() * array.length)];
+};
+
+/**
+ * Выбирает случает элемент из массива.
+ * @param {Array} array - входной массив
+ * @return {*} случайный элемент массива
+ */
+const getArrayQuantityRandomElements = (array) => {
+  return shufleArray(array).slice(0, getRandomIntegerRange(1, array.length));
+}
+
+/**
+ * Перемешивает элементы массива в случайном порядке
+ * @param {array} array — исходный массив
+ * @return {array} — итоговый массив
+ */
+const shufleArray = (array) => {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random()*(i + 1));
+    const temp = array[j];
+    array[j] = array[i];
+    array[i] = temp;
+  }
+  return array;
+}
+
+export {
+  getRandomIntegerRange,
+  getRandomObjectValue,
+  getRandomFloatRange,
+  getArrayRandomElements,
+  getArrayQuantityRandomElements
+};
