@@ -1,8 +1,3 @@
-import {
-  createCardList,
-  CARDS_QUANTITY
-} from './data.js';
-
 const PreviewsSizes = {
   WIDTH: 45,
   HEIGHT: 40,
@@ -56,7 +51,8 @@ const renderPopup = (popup) => {
 
 
   return popupElement;
-}
+};
 
-const popupsList = document.querySelector('#map-canvas');
-popupsList.appendChild(renderPopup(createCardList(CARDS_QUANTITY)[0]));
+export {
+  renderPopup
+};
