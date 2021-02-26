@@ -26,11 +26,11 @@ const Coordinates = {
 };
 
 const Price = {
-  min: 0,
-  max: 100000,
+  MIN: 0,
+  MAX: 100000,
 }
 
-const TYPE_HOUSINGS = {
+const typeHousings = {
   bungalo: 'Бунгало',
   flat: 'Квартира',
   house: 'Дом',
@@ -38,13 +38,13 @@ const TYPE_HOUSINGS = {
 };
 
 const RoomsQuantity = {
-  min: 1,
-  max: 5,
+  MIN: 1,
+  MAX: 5,
 };
 
 const QuestsQuantity = {
-  min: 1,
-  max: 5,
+  MIN: 1,
+  MAX: 5,
 }
 
 const CHECKIN_CHECKOUT_TIMES = [
@@ -98,10 +98,10 @@ const createCard = () => {
     offer: {
       title: getArrayRandomElements(TITLES),
       adress: coordinatesX + ', ' + coordinatesY,
-      price: getRandomIntegerRange(Price.min, Price.max),
-      type: getRandomObjectValue(TYPE_HOUSINGS),
-      rooms: getRandomIntegerRange(RoomsQuantity.min, RoomsQuantity.max),
-      guests: getRandomIntegerRange(QuestsQuantity.min, QuestsQuantity.max),
+      price: getRandomIntegerRange(Price.MIN, Price.MAX),
+      type: getRandomObjectValue(typeHousings),
+      rooms: getRandomIntegerRange(RoomsQuantity.MIN, RoomsQuantity.MAX),
+      guests: getRandomIntegerRange(QuestsQuantity.MIN, QuestsQuantity.MAX),
       checkin: getArrayRandomElements(CHECKIN_CHECKOUT_TIMES),
       checkout: getArrayRandomElements(CHECKIN_CHECKOUT_TIMES),
       features: getArrayQuantityRandomElements(FEATURES),
@@ -124,4 +124,4 @@ const createCardList = (quantity) => {
   return cardList;
 }
 
-export {createCardList, CARDS_QUANTITY};
+export {createCardList, CARDS_QUANTITY, FEATURES};

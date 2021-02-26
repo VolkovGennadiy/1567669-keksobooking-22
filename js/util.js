@@ -51,7 +51,7 @@ const getRandomFloatRange = function (min, max, n) {
  * @return {string|number|object} — значение объекта со случайным ключом
  */
 const getRandomObjectValue = (object) => {
-  return object[Object.keys(object)[Math.floor(Math.random() * Object.keys(object).length)]];
+  return getArrayRandomElements(Object.values(object));
 };
 
 /**

@@ -1,8 +1,3 @@
-import {
-  createCardList,
-  CARDS_QUANTITY
-} from './data.js';
-
 const PreviewsSizes = {
   WIDTH: 45,
   HEIGHT: 40,
@@ -32,9 +27,9 @@ const renderPopup = (popup) => {
 
   const renderFeatureList = () => {
     featuresList.textContent = '';
-    popup.offer.features.forEach((item, i) => {
+    popup.offer.features.forEach((FEATURES) => {
       let feature = document.createElement('li');
-      feature.classList.add('popup__feature', `popup__feature--${popup.offer.features[i]}`);
+      feature.classList.add('popup__feature', `popup__feature--${FEATURES}`);
       featuresList.append(feature);
     });
   };
@@ -45,18 +40,16 @@ const renderPopup = (popup) => {
   popupElement.querySelector('.popup__type').textContent = popup.offer.type;
   popupElement.querySelector('.popup__text--capacity').textContent = `${popup.offer.rooms} комнаты для ${popup.offer.guests} гостей`;
   popupElement.querySelector('.popup__text--time').textContent = `Заезд после ${popup.offer.checkin}, выезд до ${popup.offer.checkout}`;
-  if (popup.offer.features.length) {
-    renderFeatureList();
-  }
+  renderFeatureList(popupElement.querySelector('.popup__features'), popup.offer.features);
   popupElement.querySelector('.popup__description').textContent = popup.offer.description;
   if (popup.offer.photos.length) {
     renderPhotoList();
   }
   popupElement.querySelector('.popup__avatar').src = popup.author.avatar;
 
-
   return popupElement;
-}
+};
 
-const popupsList = document.querySelector('#map-canvas');
-popupsList.appendChild(renderPopup(createCardList(CARDS_QUANTITY)[0]));
+export {
+  renderPopup
+};
