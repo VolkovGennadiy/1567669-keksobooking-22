@@ -124,4 +124,4 @@ const createCardList = (quantity) => {
   return cardList;
 }
 
-export {createCardList, CARDS_QUANTITY};
+export {createCardList, CARDS_QUANTITY, FEATURES};
