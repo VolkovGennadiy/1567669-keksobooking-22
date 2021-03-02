@@ -41,7 +41,7 @@ const getRandomFloatRange = function (min, max, n) {
     max = min;
   }
 
-  let rand = min + Math.random() * (max + 1 - min);
+  let rand = min + Math.random() * (max  - min);
   return rand.toFixed(n);
 };
 
