@@ -1,3 +1,8 @@
+import {
+  CARDS_QUANTITY,
+  createCardList
+} from './data.js';
+
 const PreviewsSizes = {
   WIDTH: 45,
   HEIGHT: 40,
@@ -50,6 +55,4 @@ const renderPopup = (popup) => {
   return popupElement;
 };
 
-export {
-  renderPopup
-};
+export {CARDS_QUANTITY, renderPopup, createCardList};

@@ -88,7 +88,7 @@ const getAheadZeroRandomNumber = (quantity) => {
  * @return {object} — итоговый объект объявления
  */
 const createCard = () => {
-  const coordinatesX = getRandomFloatRange(Coordinates.minX, Coordinates.maxY, Coordinates.figures);
+  const coordinatesX = getRandomFloatRange(Coordinates.minX, Coordinates.maxX, Coordinates.figures);
   const coordinatesY = getRandomFloatRange(Coordinates.minY, Coordinates.maxY, Coordinates.figures);
 
   const card = {
