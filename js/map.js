@@ -47,14 +47,14 @@ const mainPinMarker = L.marker(
   },
 );
 
-const addAdress = (lat, lng) => {
-  const addres = document.querySelector('#address');
-  addres.value = `${lat.toFixed(5)}, ${lng.toFixed(5)}`;
+const addAddress = (lat, lng) => {
+  const address = document.querySelector('#address');
+  address.value = `${lat.toFixed(5)}, ${lng.toFixed(5)}`;
 }
 
 const loadMainPin = (evt) => {
   const latLng = evt.target.getLatLng();
-  addAdress(latLng.lat, latLng.lng);
+  addAddress(latLng.lat, latLng.lng);
 }
 
 L.tileLayer(
@@ -100,5 +100,5 @@ cardsList.forEach((card) => {
 
 
 mainPinMarker.addTo(map);
-addAdress(LAT, LNG);
+addAddress(LAT, LNG);
 mainPinMarker.on('moveend', loadMainPin);
