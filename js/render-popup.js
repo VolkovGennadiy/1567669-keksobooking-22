@@ -1,5 +1,4 @@
 import {
-  CARDS_QUANTITY,
   createCardList
 } from './data.js';
 
@@ -55,4 +54,4 @@ const renderPopup = (popup) => {
   return popupElement;
 };
 
-export {CARDS_QUANTITY, renderPopup, createCardList};
+export {renderPopup, createCardList};
