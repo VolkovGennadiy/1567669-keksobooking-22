@@ -1,3 +1,6 @@
+import { sendData } from './fetch.js';
+import { errorModalOpen, showModlaOpen, succesModalOpen} from './modal.js';
+
 const mapFilterHousing = document.querySelector('#type');
 const formInputPrice = document.querySelector('#price');
 const formInputTimeIn = document.querySelector('#timein');
@@ -71,5 +74,21 @@ formDisabled.classList.add('ad-form--disabled');
 mapFormDisabled.classList.add('map__filters--disabled');
 formElements.forEach(formElements => formElements.setAttribute('disabled', 'disabled'));
 mapFormElements.forEach(mapFormElements => mapFormElements.setAttribute('disabled', 'disabled'));
+
+const setUserFormSubmit = () => {
+  formDisabled.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+    sendData(
+      () => {
+        showModlaOpen(succesModalOpen);
+        formDisabled.requestFullscreen();
+      },
+      () => showModlaOpen(errorModalOpen),
+      new FormData(evt.target),
+    );
+  });
+};
+
+setUserFormSubmit();
 
 export {formDisabled, formElements, mapFormElements, mapFormDisabled, formRoomNumber, formCapacity};
