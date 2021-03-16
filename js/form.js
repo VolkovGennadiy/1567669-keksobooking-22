@@ -1,5 +1,5 @@
 import { sendData } from './fetch.js';
-import { errorModalOpen, showModlaOpen, succesModalOpen} from './modal.js';
+import { errorModalOpen, showModalOpen, succesModalOpen} from './modal.js';
 
 const mapFilterHousing = document.querySelector('#type');
 const formInputPrice = document.querySelector('#price');
@@ -80,10 +80,10 @@ const setUserFormSubmit = () => {
     evt.preventDefault();
     sendData(
       () => {
-        showModlaOpen(succesModalOpen);
+        showModalOpen(succesModalOpen);
         formDisabled.requestFullscreen();
       },
-      () => showModlaOpen(errorModalOpen),
+      () => showModalOpen(errorModalOpen),
       new FormData(evt.target),
     );
   });

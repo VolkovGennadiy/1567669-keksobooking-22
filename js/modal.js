@@ -1,38 +1,38 @@
 const successTemplate = document.querySelector('#success').content.querySelector('.success');
-const errorTemplate = document.querySelector('#error').content.querySelector('.error');
 const succesModalOpen = successTemplate.cloneNode(true);
-const errorModalOpen = errorTemplate.cloneNode(true);
 document.querySelector('main').append(succesModalOpen);
-document.querySelector('main').append(errorModalOpen);
 succesModalOpen.classList.add('hidden');
+const errorTemplate = document.querySelector('#error').content.querySelector('.error');
+const errorModalOpen = errorTemplate.cloneNode(true);
+document.querySelector('main').append(errorModalOpen);
 errorModalOpen.classList.add('hidden');
 
-const hiddenModlaOpen = (modal) => {
+const hiddenModalOpen = (modal) => {
   modal.classList.add('hidden');
 
   modal.removeEventListener('click', () => {
-    hiddenModlaOpen(modal);
+    hiddenModalOpen(modal);
   });
 
   window.removeEventListener('keydown', (evt) => {
     if (evt.key === 'Esc' || evt.key === 'Escape') {
-      hiddenModlaOpen(modal)
+      hiddenModalOpen(modal)
     }
   });
 };
 
-const showModlaOpen = (modal) => {
+const showModalOpen = (modal) => {
   modal.classList.remove('hidden');
 
   modal.addEventListener('click', () => {
-    showModlaOpen(modal);
+    showModalOpen(modal);
   });
 
   window.addEventListener('keydown', (evt) => {
     if (evt.key === 'Esc' || evt.key === 'Escape') {
-      showModlaOpen(modal)
+      showModalOpen(modal)
     }
   });
 };
 
-export {succesModalOpen, errorModalOpen, hiddenModlaOpen, showModlaOpen};
+export {succesModalOpen, errorModalOpen, hiddenModalOpen, showModalOpen};
