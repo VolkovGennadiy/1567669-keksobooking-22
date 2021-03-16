@@ -11,35 +11,40 @@ import {
 } from './render-popup.js';
 
 import {
-  CARDS_QUANTITY,
-  createCardList
-} from './data.js';
+  getData
+} from './fetch.js';
 
-const LAT = 35.68950;
-const LNG = 139.69171;
+
+const coordMap = {
+  LAT: 35.68950,
+  LNG: 139.69171,
+}
+
+const newAddres = document.querySelector('#address');
+const fixedNumber = 5;
 
 const map = L.map('map-canvas')
   .on('load', () => {
     formDisabled.classList.remove('ad-form--disabled');
-    formElements.forEach(formElements => formElements.removeAttribute('disabled', 'disabled'));
+    formElements.forEach(formElements => formElements.removeAttribute('disabled', 'disabled'));    /* Переписать на функции */
     mapFormDisabled.classList.remove('map__filters--disabled');
     mapFormElements.forEach(mapFormElements => mapFormElements.removeAttribute('disabled', 'disabled'));
   })
   .setView({
-    lat: LAT,
-    lng: LNG,
+    lat: coordMap.LAT,
+    lng: coordMap.LNG,
   }, 10);
 
 const mainPinIcon = L.icon({
-  iconUrl: '../img/main-pin.svg',
+  iconUrl: './img/main-pin.svg',
   iconSize: [50, 50],
   iconAnchor: [25, 50],
 })
 
 const mainPinMarker = L.marker(
   {
-    lat: LAT,
-    lng: LNG,
+    lat:coordMap.LAT,
+    lng: coordMap.LNG,
   },
   {
     draggable: true,
@@ -47,14 +52,14 @@ const mainPinMarker = L.marker(
   },
 );
 
-const addAddress = (lat, lng) => {
-  const address = document.querySelector('#address');
-  address.value = `${lat.toFixed(5)}, ${lng.toFixed(5)}`;
+const setAddress = (lat, lng) => {
+  const address = newAddres;
+  address.value = `${lat.toFixed(fixedNumber)}, ${lng.toFixed(fixedNumber)}`;
 }
 
-const loadMainPin = (evt) => {
+const onMainPin = (evt) => {
   const latLng = evt.target.getLatLng();
-  addAddress(latLng.lat, latLng.lng);
+  setAddress(latLng.lat, latLng.lng);
 }
 
 L.tileLayer(
@@ -64,41 +69,36 @@ L.tileLayer(
   },
 ).addTo(map);
 
-const cardsList = createCardList(CARDS_QUANTITY);
+getData((renderList) => {
+  renderList.forEach((render) => {
 
-cardsList.forEach((card) => {
+    const icon = L.icon({
+      iconUrl: './img/pin.svg',
+      iconSize: [40, 40],
+      iconAnchor: [20, 20],
+    });
 
-  const lat = card.location.x;
-  const lng = card.location.y;
-
-
-  const icon = L.icon({
-    iconUrl: '../img/pin.svg',
-    iconSize: [40, 40],
-    iconAnchor: [20, 40],
-  });
-
-  const marker = L.marker(
-    {
-      lat,
-      lng,
-    },
-    {
-      icon,
-    },
-  );
-
-  marker
-    .addTo(map)
-    .bindPopup(
-      renderPopup(card),
+    const marker = L.marker(
       {
-        keepInView: true,
+        lat: render.location.lat,
+        lng: render.location.lng,
+      },
+      {
+        icon,
       },
     );
+
+    marker
+      .addTo(map)
+      .bindPopup(
+        renderPopup(render),
+        {
+          keepInView: true,
+        },
+      );
+  });
 });
 
-
 mainPinMarker.addTo(map);
-addAddress(LAT, LNG);
-mainPinMarker.on('moveend', loadMainPin);
+setAddress(coordMap.LAT, coordMap.LNG);
+mainPinMarker.on('move', onMainPin);
