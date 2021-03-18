@@ -7,7 +7,7 @@ import {
 } from './util.js';
 
 const AVATAR_QUANTITY = 8;
-const CARDS_QUANTITY = 10;
+const CARDS_QUANTITY = 90;
 
 const TITLES = [
   'Уютная квартира в центре Токио',
