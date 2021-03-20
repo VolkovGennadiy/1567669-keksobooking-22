@@ -7,10 +7,33 @@ const formInputTimeIn = document.querySelector('#timein');
 const formInpuTimeOut = document.querySelector('#timeout');
 const formDisabled = document.querySelector('.ad-form');
 const formElements = formDisabled.querySelectorAll('input, select, textarea, buttun');
-const mapFormDisabled = document.querySelector('.map__filters');
-const mapFormElements = mapFormDisabled.querySelectorAll('input, select');
 const formRoomNumber = formDisabled.querySelector('#room_number')
 const formCapacity = formDisabled.querySelector('#capacity');
+const mapFormDisabled = document.querySelector('.map__filters');
+const mapFormElements = mapFormDisabled.querySelectorAll('input, select');
+
+/*
+const roomsGuests = {
+  1: [1],
+  2: [1, 2],
+  3: [1, 2, 3],
+  100: [0],
+}
+
+const onRoomsChange = () => {
+  const capacityOptions = formCapacity.options;
+  for (let capacityOption of capacityOptions) {
+    if (roomsGuests[formRoomNumber.value].includes(capacityOption.value)) {
+      capacityOption.selected = true;
+      capacityOption.style.display = 'block';
+    } else {
+      capacityOption.style.display = 'none';
+    }
+  }
+};
+
+formRoomNumber.addEventListener('change', onRoomsChange);
+*/
 
 formRoomNumber.addEventListener('change', (evt) => {
   switch (evt.target.value) {
@@ -91,4 +114,4 @@ const setUserFormSubmit = () => {
 
 setUserFormSubmit();
 
-export {formDisabled, formElements, mapFormElements, mapFormDisabled, formRoomNumber, formCapacity};
+export {formDisabled, formElements, mapFormElements, mapFormDisabled, formRoomNumber};

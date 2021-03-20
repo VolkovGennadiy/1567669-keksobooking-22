@@ -10,11 +10,6 @@ import {
   renderPopup
 } from './render-popup.js';
 
-import {
-  getData
-} from './fetch.js';
-
-
 const coordMap = {
   LAT: 35.68950,
   LNG: 139.69171,
@@ -69,8 +64,10 @@ L.tileLayer(
   },
 ).addTo(map);
 
-getData((renderList) => {
-  renderList.forEach((render) => {
+let markersGroup = L.layerGroup().addTo(map);
+
+const renderList = (data) => {
+  data.forEach((render) => {
 
     const icon = L.icon({
       iconUrl: './img/pin.svg',
@@ -89,7 +86,7 @@ getData((renderList) => {
     );
 
     marker
-      .addTo(map)
+      .addTo(markersGroup)
       .bindPopup(
         renderPopup(render),
         {
@@ -97,8 +94,16 @@ getData((renderList) => {
         },
       );
   });
-});
+};
+
+const removeMarker = () => {
+  map.removeLayer(markersGroup);
+  markersGroup = L.layerGroup().addTo(map);
+}
 
 mainPinMarker.addTo(map);
 setAddress(coordMap.LAT, coordMap.LNG);
 mainPinMarker.on('move', onMainPin);
+
+
+export {renderList, removeMarker}
