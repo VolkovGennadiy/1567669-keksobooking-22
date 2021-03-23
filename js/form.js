@@ -1,5 +1,6 @@
 import { sendData } from './fetch.js';
 import { errorModalOpen, showModalOpen, succesModalOpen} from './modal.js';
+import {removeMarkers} from './map.js'
 
 const mapFilterHousing = document.querySelector('#type');
 const formInputPrice = document.querySelector('#price');
@@ -11,29 +12,6 @@ const formRoomNumber = formDisabled.querySelector('#room_number')
 const formCapacity = formDisabled.querySelector('#capacity');
 const mapFormDisabled = document.querySelector('.map__filters');
 const mapFormElements = mapFormDisabled.querySelectorAll('input, select');
-
-/*
-const roomsGuests = {
-  1: [1],
-  2: [1, 2],
-  3: [1, 2, 3],
-  100: [0],
-}
-
-const onRoomsChange = () => {
-  const capacityOptions = formCapacity.options;
-  for (let capacityOption of capacityOptions) {
-    if (roomsGuests[formRoomNumber.value].includes(capacityOption.value)) {
-      capacityOption.selected = true;
-      capacityOption.style.display = 'block';
-    } else {
-      capacityOption.style.display = 'none';
-    }
-  }
-};
-
-formRoomNumber.addEventListener('change', onRoomsChange);
-*/
 
 formRoomNumber.addEventListener('change', (evt) => {
   switch (evt.target.value) {
@@ -112,6 +90,13 @@ const setUserFormSubmit = () => {
   });
 };
 
+const changeFilteres = (cb) => {
+  mapFormDisabled.addEventListener('change', () => {
+    removeMarkers();
+    cb();
+  });
+};
+
 setUserFormSubmit();
 
-export {formDisabled, formElements, mapFormElements, mapFormDisabled, formRoomNumber};
+export {formDisabled, formElements, mapFormElements, mapFormDisabled, changeFilteres, formRoomNumber};

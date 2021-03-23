@@ -87,10 +87,19 @@ const shufleArray = (array) => {
   return array;
 }
 
+const debounce = (cb, delay) => {
+  let timeout;
+  return () => {
+    if (timeout) clearTimeout(timeout);
+    timeout = setTimeout(cb, delay)
+  };
+};
+
 export {
   getRandomIntegerRange,
   getRandomObjectValue,
   getRandomFloatRange,
   getArrayRandomElements,
-  getArrayQuantityRandomElements
+  getArrayQuantityRandomElements,
+  debounce
 };

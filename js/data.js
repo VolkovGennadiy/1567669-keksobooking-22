@@ -1,13 +1,21 @@
+import { getData } from './fetch.js';
+import { renderList } from './map.js';
 import {
   getRandomIntegerRange,
   getRandomFloatRange,
   getRandomObjectValue,
   getArrayRandomElements,
-  getArrayQuantityRandomElements
+  getArrayQuantityRandomElements,
+  debounce
 } from './util.js';
+
+import {filterData} from './filter.js'
+import { changeFilteres } from './form.js';
 
 const AVATAR_QUANTITY = 8;
 const CARDS_QUANTITY = 10;
+
+const RERENDER_DELAY = 500;
 
 const TITLES = [
   'Уютная квартира в центре Токио',
@@ -123,5 +131,19 @@ const createCardList = (quantity) => {
   }
   return cardList;
 }
+
+const sendSuccess = () => {
+  getData((data) => {
+    renderList(data);
+
+    const renderFilterData = () => {
+      renderList(filterData(data))
+    };
+
+    changeFilteres(debounce(renderFilterData, RERENDER_DELAY));
+  })
+}
+
+getData(sendSuccess);
 
 export {createCardList, CARDS_QUANTITY, FEATURES};
