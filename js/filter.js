@@ -1,5 +1,5 @@
 import { getData } from './fetch.js';
-import { removeMarker, renderList } from './map.js';
+import { removeMarkers, renderList } from './map.js';
 
 const filterForm = document.querySelector('.map__filters');
 const typeFilter = filterForm.querySelector('#housing-type');
@@ -35,7 +35,7 @@ const checkRooms = (data) => {
 };
 
 const checkQuests = (data) => {
-  return Number(questsFilter.valu) === data.offer.quests || questsFilter.value === VALUE_DEFAULT;
+  return Number(questsFilter.value) === data.offer.quests || questsFilter.value === VALUE_DEFAULT;
 };
 
 const checkFeatures = (data) => {
@@ -65,12 +65,10 @@ const fetchData = getData((offers) => {
   data = offers;
   renderList(data.slice(0, CARD_COUNTER));
   filterForm.addEventListener('change', () => {
-    const filtrOffers = filterData(data);
-    removeMarker();
-    renderList(filtrOffers.slice(0, CARD_COUNTER))
+    const filteredOffers = filterData(data);
+    removeMarkers();
+    renderList(filteredOffers.slice(0, CARD_COUNTER))
   });
-},
-() => {},
-);
+});
 
-fetchData;
+export {fetchData, filterData};
