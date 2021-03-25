@@ -1,7 +1,3 @@
-import {
-  createCardList
-} from './data.js';
-
 const PreviewsSizes = {
   WIDTH: 45,
   HEIGHT: 40,
@@ -38,10 +34,17 @@ const renderPopup = (popup) => {
     });
   };
 
+  const typeHousings = {
+    bungalow: 'Бунгало',
+    flat: 'Квартира',
+    house: 'Дом',
+    palace: 'Дворец',
+  };
+
   popupElement.querySelector('.popup__title').textContent = popup.offer.title;
-  popupElement.querySelector('.popup__text--address').textContent = popup.offer.adress;
+  popupElement.querySelector('.popup__text--address').textContent = popup.offer.address;
   popupElement.querySelector('.popup__text--price').textContent = `${popup.offer.price} ₽/ночь`;
-  popupElement.querySelector('.popup__type').textContent = popup.offer.type;
+  popupElement.querySelector('.popup__type').textContent = typeHousings[popup.offer.type];
   popupElement.querySelector('.popup__text--capacity').textContent = `${popup.offer.rooms} комнаты для ${popup.offer.guests} гостей`;
   popupElement.querySelector('.popup__text--time').textContent = `Заезд после ${popup.offer.checkin}, выезд до ${popup.offer.checkout}`;
   renderFeatureList(popupElement.querySelector('.popup__features'), popup.offer.features);
@@ -54,4 +57,4 @@ const renderPopup = (popup) => {
   return popupElement;
 };
 
-export {renderPopup, createCardList};
+export {renderPopup};

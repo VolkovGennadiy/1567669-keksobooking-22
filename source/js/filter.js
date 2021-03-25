@@ -5,7 +5,7 @@ const filterForm = document.querySelector('.map__filters');
 const typeFilter = filterForm.querySelector('#housing-type');
 const priceFilter = filterForm.querySelector('#housing-price');
 const roomsFilter = filterForm.querySelector('#housing-rooms');
-const questsFilter = filterForm.querySelector('#housing-guests');
+const guestsFilter = filterForm.querySelector('#housing-guests');
 const featuresFilter = filterForm.querySelector('#housing-features');
 
 const VALUE_DEFAULT = 'any';
@@ -35,7 +35,7 @@ const checkRooms = (data) => {
 };
 
 const checkQuests = (data) => {
-  return Number(questsFilter.value) === data.offer.quests || questsFilter.value === VALUE_DEFAULT;
+  return Number(guestsFilter.value) === data.offer.guests || guestsFilter.value === VALUE_DEFAULT;
 };
 
 const checkFeatures = (data) => {

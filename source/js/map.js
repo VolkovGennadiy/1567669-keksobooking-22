@@ -96,6 +96,20 @@ const renderList = (data) => {
   });
 };
 
+const defaultMarker = () => {
+  mainPinMarker.setLatLng([coordMap.LAT, coordMap.LNG]).update();
+};
+
+const resetMarker = () => {
+  markersGroup.clearLayers();
+  map.closePopup();
+}
+
+const resetMap = () => {
+  defaultMarker();
+  resetMarker();
+}
+
 const removeMarkers = () => {
   map.removeLayer(markersGroup);
   markersGroup = L.layerGroup().addTo(map);
@@ -106,4 +120,4 @@ setAddress(coordMap.LAT, coordMap.LNG);
 mainPinMarker.on('move', onMainPin);
 
 
-export {renderList, removeMarkers}
+export {renderList, removeMarkers, resetMap};
