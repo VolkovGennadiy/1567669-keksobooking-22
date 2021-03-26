@@ -10,6 +10,7 @@ const formInputPrice = formDisabled.querySelector('#price');
 const formElements = formDisabled.querySelectorAll('input, select, textarea, buttun');
 const formRoomNumber = formDisabled.querySelector('#room_number')
 const formCapacity = formDisabled.querySelector('#capacity');
+const resetButton = formDisabled.querySelector('.ad-form__reset')
 const mapFormDisabled = document.querySelector('.map__filters');
 const mapFormElements = mapFormDisabled.querySelectorAll('input, select');
 
@@ -91,8 +92,8 @@ const changeFilteres = (cb) => {
 };
 
 const resetAllForm = (cb) => {
-  formDisabled.addEventListener('reset', (evt) => {
-    evt.preventDefault()
+  resetButton.addEventListener('click', (evt) => {
+    evt.preventDefault();
     defaultMarker();
     resetForm();
     cb()
