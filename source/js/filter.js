@@ -47,17 +47,6 @@ const checkFeatures = (data) => {
   return true;
 };
 
-/*
-const checkAllFilters = (data) => {
-  return checkType(data) && checkPrice(data) && checkRooms(data) && checkQuests(data) && checkFeatures(data);
-};
-
-/*
-const filterData = (data) => {
-  return data.filter(checkAllFilters).slice(0, CARD_COUNTER);
-}
-*/
-
 const filterData = (arr) => {
   const filters = [];
 
