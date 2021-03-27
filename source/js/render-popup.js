@@ -3,6 +3,13 @@ const PreviewsSizes = {
   HEIGHT: 40,
 };
 
+const typeHousings = {
+  bungalow: 'Бунгало',
+  flat: 'Квартира',
+  house: 'Дом',
+  palace: 'Дворец',
+};
+
 const popupTemplate = document.querySelector('#card')
   .content
   .querySelector('.popup');
@@ -32,13 +39,6 @@ const renderPopup = (popup) => {
       feature.classList.add('popup__feature', `popup__feature--${FEATURES}`);
       featuresList.append(feature);
     });
-  };
-
-  const typeHousings = {
-    bungalow: 'Бунгало',
-    flat: 'Квартира',
-    house: 'Дом',
-    palace: 'Дворец',
   };
 
   popupElement.querySelector('.popup__title').textContent = popup.offer.title;

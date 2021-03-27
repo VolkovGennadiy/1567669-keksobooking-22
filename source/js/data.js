@@ -7,8 +7,6 @@ import {
 import {filterData} from './filter.js'
 import { changeFilteres, resetAllForm } from './form.js';
 
-const CARDS_QUANTITY = 10;
-
 const RERENDER_DELAY = 500;
 
 const sendSuccess = () => {
@@ -28,5 +26,3 @@ const sendSuccess = () => {
 }
 
 getData(sendSuccess);
-
-export {CARDS_QUANTITY};

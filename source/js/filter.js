@@ -1,6 +1,3 @@
-import { getData } from './fetch.js';
-import { renderList } from './map.js';
-
 const filterForm = document.querySelector('.map__filters');
 const typeFilter = filterForm.querySelector('#housing-type');
 const priceFilter = filterForm.querySelector('#housing-price');
@@ -11,7 +8,6 @@ const featuresFilter = filterForm.querySelector('#housing-features');
 const VALUE_DEFAULT = 'any';
 const MIN_PRICE = 10000;
 const MAX_PRICE = 50000;
-const CARD_COUNTER = 10;
 
 const checkType = (data) => {
   return typeFilter.value === data.offer.type || typeFilter.value === VALUE_DEFAULT;
@@ -51,23 +47,33 @@ const checkFeatures = (data) => {
   return true;
 };
 
+/*
 const checkAllFilters = (data) => {
   return checkType(data) && checkPrice(data) && checkRooms(data) && checkQuests(data) && checkFeatures(data);
 };
 
+/*
 const filterData = (data) => {
   return data.filter(checkAllFilters).slice(0, CARD_COUNTER);
 }
+*/
 
-let data = [];
+const filterData = (arr) => {
+  const filters = [];
 
-const fetchData = getData((offers) => {
-  data = offers;
-  renderList(data.slice(0, CARD_COUNTER));
-  filterForm.addEventListener('change', () => {
-    const filteredOffers = filterData(data);
-    renderList(filteredOffers.slice(0, CARD_COUNTER))
-  });
-});
+  for (let i = 0; i< arr.length; i++) {
+    const item = arr[i];
 
-export {fetchData, filterData};
+    if (checkType(item) && checkPrice(item) && checkRooms(item) && checkQuests(item) && checkFeatures(item)) {
+      filters.push(item);
+    }
+
+    if (filters.length >= 10) {
+      break;
+    }
+  }
+
+  return filters;
+};
+
+export {filterData};

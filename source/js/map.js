@@ -15,7 +15,7 @@ const coordMap = {
   LNG: 139.69171,
 }
 
-const newAddres = document.querySelector('#address');
+const newAddress = document.querySelector('#address');
 const fixedNumber = 5;
 
 const map = L.map('map-canvas')
@@ -48,7 +48,7 @@ const mainPinMarker = L.marker(
 );
 
 const setAddress = (lat, lng) => {
-  const address = newAddres;
+  const address = newAddress;
   address.value = `${lat.toFixed(fixedNumber)}, ${lng.toFixed(fixedNumber)}`;
 }
 

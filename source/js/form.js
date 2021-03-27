@@ -3,7 +3,7 @@ import { showError, showSuccess} from './modal.js';
 import { defaultMarker, removeMarkers, resetMap} from './map.js'
 
 const formInputTimeIn = document.querySelector('#timein');
-const formInpuTimeOut = document.querySelector('#timeout');
+const formInputTimeOut = document.querySelector('#timeout');
 const formDisabled = document.querySelector('.ad-form');
 const mapFilterHousing = formDisabled.querySelector('#type');
 const formInputPrice = formDisabled.querySelector('#price');
@@ -45,11 +45,11 @@ mapFilterHousing.addEventListener('change', () => {
 });
 
 formInputTimeIn.addEventListener('change', () => {
-  formInpuTimeOut.value = formInputTimeIn.value;
+  formInputTimeOut.value = formInputTimeIn.value;
 });
 
-formInpuTimeOut.addEventListener('change', () => {
-  formInputTimeIn.value = formInpuTimeOut.value;
+formInputTimeOut.addEventListener('change', () => {
+  formInputTimeIn.value = formInputTimeOut.value;
 });
 
 const disableForm = () => {
