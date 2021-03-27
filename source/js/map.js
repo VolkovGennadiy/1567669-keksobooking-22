@@ -98,6 +98,7 @@ const renderList = (data) => {
 
 const defaultMarker = () => {
   mainPinMarker.setLatLng([coordMap.LAT, coordMap.LNG]).update();
+  map.setView([coordMap.LAT, coordMap.LNG]);
 };
 
 const resetMarker = () => {
@@ -107,6 +108,7 @@ const resetMarker = () => {
 
 const resetMap = () => {
   resetMarker();
+  setAddress(coordMap.LAT, coordMap.LNG);
 }
 
 const removeMarkers = () => {

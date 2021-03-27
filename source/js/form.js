@@ -1,6 +1,6 @@
 import { sendData } from './fetch.js';
 import { showError, showSuccess} from './modal.js';
-import { defaultMarker, resetMap} from './map.js'
+import { defaultMarker, removeMarkers, resetMap} from './map.js'
 
 const formInputTimeIn = document.querySelector('#timein');
 const formInpuTimeOut = document.querySelector('#timeout');
@@ -8,8 +8,9 @@ const formDisabled = document.querySelector('.ad-form');
 const mapFilterHousing = formDisabled.querySelector('#type');
 const formInputPrice = formDisabled.querySelector('#price');
 const formElements = formDisabled.querySelectorAll('input, select, textarea, buttun');
-const formRoomNumber = formDisabled.querySelector('#room_number')
+const roomNumber = formDisabled.querySelector('#room_number')
 const formCapacity = formDisabled.querySelector('#capacity');
+const resetButton = formDisabled.querySelector('.ad-form__reset')
 const mapFormDisabled = document.querySelector('.map__filters');
 const mapFormElements = mapFormDisabled.querySelectorAll('input, select');
 
@@ -27,19 +28,16 @@ const MinPrices = {
   PALACE: 10000,
 };
 
-const setRoomsCapacity = () => {
+const onRoomsChange = () => {
   const capacityOptions = formCapacity.options;
   for (let capacityOption of capacityOptions) {
-    if (RoomsCapacity[formRoomNumber.value].includes(capacityOption.value)) {
-      capacityOption.selected = true;
-      capacityOption.style.display = 'block';
-    } else {
-      capacityOption.style.display = 'none';
-    }
+    capacityOption.disabled = !RoomsCapacity[roomNumber.value].includes(capacityOption.value);
+    capacityOption.selected = !capacityOption.disabled;
   }
 };
 
-formRoomNumber.addEventListener('change', setRoomsCapacity);
+onRoomsChange();
+roomNumber.addEventListener('change', onRoomsChange);
 
 mapFilterHousing.addEventListener('change', () => {
   formInputPrice.placeholder = MinPrices[mapFilterHousing.value.toUpperCase()];
@@ -65,6 +63,7 @@ const resetForm = () => {
   mapFormDisabled.reset();
   formDisabled.reset();
   resetMap();
+  removeMarkers();
 }
 
 const handleSubmit = () => {
@@ -74,7 +73,7 @@ const handleSubmit = () => {
 
 const handleError = () => {
   showError();
-  resetForm();
+  resetMap();
 }
 
 formDisabled.addEventListener('submit', (evt) => {
@@ -91,8 +90,8 @@ const changeFilteres = (cb) => {
 };
 
 const resetAllForm = (cb) => {
-  formDisabled.addEventListener('reset', (evt) => {
-    evt.preventDefault()
+  resetButton.addEventListener('click', (evt) => {
+    evt.preventDefault();
     defaultMarker();
     resetForm();
     cb()
@@ -101,4 +100,4 @@ const resetAllForm = (cb) => {
 
 disableForm();
 
-export {formDisabled, formElements, mapFormElements, mapFormDisabled, changeFilteres, formRoomNumber, resetAllForm};
+export {formDisabled, formElements, mapFormElements, mapFormDisabled, changeFilteres, roomNumber, resetAllForm};
